@@ -8,3 +8,6 @@ import './home-page.html';
 
 import './list-stuff-page.html';
 import './list-stuff-page.js';
+
+import './Add_Contact_Page.html';
+import './Add_Contact_Page.js';
