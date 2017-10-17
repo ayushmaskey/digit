@@ -1,41 +1,31 @@
 <template name="Home_Page">
-	<div class="ui container">
-		<table class="ui celled table">
-			<thead>
-			<tr>
-				<th>First</th>
-				<th>Last</th>
-				<th>Address</th>
-				<th>Phone</th>
-				<th>Email</th>
-			</tr>
-			</thead>
+	{{#If_Logged_In}}
+		<div class="ui container">
+			{{#if Template.subscriptionsReady}}
+				<table class="ui celled table">
+					<thead>
+					<tr>
+						<th>First</th>
+						<th>Last</th>
+						<th>Address</th>
+						<th>Phone</th>
+						<th>Email</th>
+					</tr>
+					</thead>
 
-			<tbody>
-			<tr>
-				<td>Philip</td>
-				<td>Johnson</td>
-				<td>1680 East-West Rd</td>
-				<td>808-956-3489</td>
-				<td>johnson@hawaii.edu</td>
-			</tr>
+					<tbody>
 
-			<tr>
-				<td>Henri</td>
-				<td>casanova</td>
-				<td>1680 East-West Rd</td>
-				<td>808-956-2649</td>
-				<td>henric@hawaii.edu</td>
-			</tr>
+						{{#each contact in stuffList}}
+							<tr>
+								<td>{{contact.First}}</td>
+								<td>{{contact.Last}}</td>
+								<td><a href="{{pathFor 'Edit_Contact_Page' _id=stuff._id}}">Edit</a></td>
+							</tr>
+						{{/each}}
 
-			<tr>
-				<td>Kim</td>
-				<td>Binsted</td>
-				<td>1680 East-West Rd</td>
-				<td>808-956-6107</td>
-				<td>binsted@hawaii.edu</td>
-			</tr>
-			</tbody>
-		</table>
-	</div>
+					</tbody>
+				</table>
+			{{/if}}
+		</div>
+	{{/If_Logged_In}}
 </template>
