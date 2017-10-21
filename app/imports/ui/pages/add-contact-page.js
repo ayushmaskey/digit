@@ -10,7 +10,7 @@ const displayErrorMessages = 'displayErrorMessages';
 const createContext = ContactsSchema.namedContext('Add_Contact_Page');
 
 Tracker.autorun(function () {
-  console.log('autorum', createContext.isValid(), createContext.validationErrors());
+  console.log('autorum', createContext.isValid(), createContext.invalidKeys());
 });
 
 
