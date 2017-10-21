@@ -24,6 +24,11 @@ Template.Add_Contact_Page.helpers({
   errorClass() {
     return Template.instance().messageFlags.get(displayErrorMessages) ? 'error' : '';
   },
+  fieldError(fieldName) {
+    const invalidKeys = Template.instance().context.invalidKeys();
+    const errorObject = _.find(invalidKeys, (keyObj) => keyObj.name === fieldName);
+    return errorObject && Template.instance().context.keyErrorMessage(errorObject.name);
+  },
 });
 
 Template.Add_Contact_Page.events({
@@ -37,7 +42,7 @@ Template.Add_Contact_Page.events({
 
     const newContactData = { first, last, address, phone, email };
     // Clear out any old validation errors.
-    instance.context.reset();
+    instance.context.resetValidation();
     // Invoke clean so that newStudentData reflects what will be inserted.
     const cleanData = ContactsSchema.clean(newContactData);
     // Determine validity.
