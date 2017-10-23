@@ -14,13 +14,13 @@ Tracker.autorun(function () {
   console.log('autorum', createContext.isValid(), createContext.invalidKeys());
 });
 
-Template.Add_Contact_Page.onCreated(function onCreated() {
+Template.Edit_Contact_Page.onCreated(function onCreated() {
   this.messageFlags = new ReactiveDict();
   this.messageFlags.set(displayErrorMessages, false);
   this.context = createContext;
 });
 
-Template.Add_Contact_Page.helpers({
+Template.Edit_Contact_Page.helpers({
   errorClass() {
     return Template.instance().messageFlags.get(displayErrorMessages) ? 'error' : '';
   },
@@ -31,7 +31,7 @@ Template.Add_Contact_Page.helpers({
   },
 });
 
-Template.Add_Contact_Page.events({
+Template.Edit_Contact_Page.events({
   'submit .contact-data-form'(event, instance) {
     event.preventDefault();
     const first = event.target.First.value;
