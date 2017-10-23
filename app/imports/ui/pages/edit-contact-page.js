@@ -1,18 +1,24 @@
+import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Template } from 'meteor/templating';
-import { _ } from 'meteor/underscore';
+// import { _ } from 'meteor/underscore';
 import { Contact, ContactsSchema } from '../../api/contacts/contacts.js';
 
-/* eslint-disable object-shorthand, no-unused-vars, no-param-reassign */
+/* eslint-disable no-param-reassign */
 
 const displayErrorMessages = 'displayErrorMessages';
+const createContext = ContactsSchema.namedContext('Edit_Contact_Schema_Page');
+
+Tracker.autorun(function () {
+  console.log('autorum', createContext.isValid(), createContext.invalidKeys());
+});
 
 Template.Edit_Contact_Page.onCreated(function onCreated() {
-  this.subscribe('Contact');
+  this.subscribe('ContactPublish');
   this.messageFlags = new ReactiveDict();
   this.messageFlags.set(displayErrorMessages, false);
-  this.context = ContactsSchema.namedContext('Edit_ContactData_Page');
+  this.context = createContext;
 });
 
 Template.Edit_Contact_Page.helpers({
@@ -34,24 +40,21 @@ Template.Edit_Contact_Page.helpers({
 Template.Edit_Contact_Page.events({
   'submit .contact-data-form'(event, instance) {
     event.preventDefault();
-    // Get name (text field)
     const first = event.target.First.value;
     const last = event.target.Last.value;
     const address = event.target.Address.value;
     const phone = event.target.Telephone.value;
     const email = event.target.Email.value;
 
-    const updatedStudentData = { first, last, address, phone, email };
-
+    const newContactData = { first, last, address, phone, email };
     // Clear out any old validation errors.
     instance.context.resetValidation();
     // Invoke clean so that newStudentData reflects what will be inserted.
-    const cleanData = ContactsSchema.clean(updatedStudentData);
+    const cleanData = ContactsSchema.clean(newContactData);
     // Determine validity.
     instance.context.validate(cleanData);
-
     if (instance.context.isValid()) {
-      const id = Contact.update(FlowRouter.getParam('_id'), { $set: cleanData });
+      Contact.insert(cleanData);
       instance.messageFlags.set(displayErrorMessages, false);
       FlowRouter.go('Home_Page');
     } else {

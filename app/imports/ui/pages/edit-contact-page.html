@@ -1,9 +1,9 @@
 <Template name="Edit_Contact_Page">
 	{{#if Template.subscriptionsReady}}
 		<div class="ui container">
-			<form class="ui form contact-data-form {{ errorClass }}">
+			<form class="ui form contact-data-form  {{ errorClass }}">
 
-				<h4 class="ui dividing header">Edit Contact</h4>
+				<h4 class="ui dividing header">Add Contact</h4>
 
 				<div class="field">
 					<div class="two fields">
@@ -12,23 +12,17 @@
 					</div>
 				</div>
 
-
-				<div class="field">
-					<div class="field">
-						{{> Text_Form_Control label="Address" required=true value=(contactDataField 'address') errorMessage=(fieldError "address")}}
-
-					</div>
-				</div>
+				{{> Text_Form_Control label="Address" required=true value=(contactDataField 'address') errorMessage=(fieldError "address")}}
+				{{> Text_Form_Control label="Address" required=true value=(contactDataField 'address') errorMessage=(fieldError "address")}}
 
 				<div class="field">
 					<div class="two fields">
 						{{> Text_Form_Control label="Telephone" required=true value=(contactDataField 'telephone') errorMessage=(fieldError "telephone")}}
 						{{> Text_Form_Control label="Email" required=true value=(contactDataField 'email') errorMessage=(fieldError "email")}}
-
 					</div>
 				</div>
 
-				<div class="ui submit button" type="submit">Update</div>
+				<button class="ui primary button" type="submit">Update </button>
 
 			</form>
 		</div>
