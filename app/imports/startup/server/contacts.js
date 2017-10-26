@@ -1,5 +1,6 @@
 import { Contact } from '../../api/contacts/contacts.js';
 import { _ } from 'meteor/underscore';
+import { Meteor } from 'meteor/meteor';
 
 /**
  * A list of Contact to pre-fill the Collection.
@@ -35,6 +36,8 @@ const contactSeeds = [
     email: 'glee@hawaii.edu',
   },
 ];
+
+Contact._ensureIndex({ first: 1, last: 1 }, { unique: true });
 
 /**
  * Initialize the Contact collection if empty with seed data.
