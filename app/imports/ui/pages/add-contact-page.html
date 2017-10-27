@@ -11,9 +11,12 @@
 				</div>
 			</div>
 
-
-			{{> Text_Form_Control label="Address" required=true errorMessage=(fieldError "address")}}
-
+			<div class="field">
+				<div class="two fields">
+					{{> Text_Form_Control label="Address" required=true errorMessage=(fieldError "address")}}
+					{{> Select_Form_Control label="Group" required=true options=group errorMessage=(fieldError "group") }}
+				</div>
+			</div>
 
 			<div class="field">
 				<div class="two fields">

@@ -41,6 +41,12 @@ export const ContactsSchema = new SimpleSchema({
     max: 30,
     regEx: SimpleSchema.RegEx.Email,
   },
+  group: {
+    label: 'group',
+    type: String,
+    optional: false,
+    max: 30,
+  },
 });
 
 Contact.attachSchema(ContactsSchema);
