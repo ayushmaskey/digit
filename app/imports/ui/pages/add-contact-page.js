@@ -13,6 +13,15 @@ const createContext = ContactsSchema.namedContext('Add_Contact_Schema_Page');
 Tracker.autorun(function () {
   console.log('autorum', createContext.isValid(), createContext.invalidKeys());
 });
+export const favObj = [{ label: 'yes', value: true }, { label: 'no', value: false }];
+export const groupList = ['School', 'Work', 'Family', 'Friends', 'Other'];
+// export const groupObject = [
+//   { value: 'School', selected: false },
+//   { value: 'Work', selected: false },
+//   { value: 'Family', selected: false },
+//   { value: 'Fiends', selected: false },
+//   { value: 'Other', selected: true },
+// ];
 
 Template.Add_Contact_Page.onCreated(function onCreated() {
   this.messageFlags = new ReactiveDict();
@@ -29,6 +38,18 @@ Template.Add_Contact_Page.helpers({
     const errorObject = _.find(invalidKeys, (keyObj) => keyObj.name === fieldName);
     return errorObject && Template.instance().context.keyErrorMessage(errorObject.name);
   },
+  group() {
+    // return groupObject;
+    return _.map(groupList, function makeGroupObject(grp) {
+      return { label: grp };
+    });
+  },
+  favorite() {
+    return favObj;
+    // return _.map(favList, function makeFavObject(fav) {
+    //   return { label: fav };
+    // });
+  },
 });
 
 Template.Add_Contact_Page.events({
@@ -37,10 +58,12 @@ Template.Add_Contact_Page.events({
     const first = event.target.First.value;
     const last = event.target.Last.value;
     const address = event.target.Address.value;
+    const group = event.target.Group.value;
     const phone = event.target.Telephone.value;
     const email = event.target.Email.value;
+    const fav = event.target.Favorite.value;
 
-    const newContactData = { first, last, address, phone, email };
+    const newContactData = { first, last, address, phone, email, group, fav };
     // Clear out any old validation errors.
     instance.context.resetValidation();
     // Invoke clean so that newStudentData reflects what will be inserted.
@@ -56,4 +79,3 @@ Template.Add_Contact_Page.events({
     }
   },
 });
-

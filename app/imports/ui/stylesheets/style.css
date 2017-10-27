@@ -16,3 +16,18 @@ body {
   color: #FFFFFF;
 }
 
+.School {
+  background-color: red;
+}
+.Family {
+  background-color: yellow;
+}
+.Friends {
+  background-color: green;
+}
+.Other {
+  background-color: brown;
+}
+.Work {
+  background-color: blue;
+}

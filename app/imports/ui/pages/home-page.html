@@ -22,6 +22,7 @@
 						<td>{{contact.phone}}</td>
 						<td>{{contact.email}}</td>
 						<td><a href="{{pathFor 'Edit_Contact_Page' _id=contact._id}}">Edit</a></td>
+						{{#if contact.favorite}} <i class="star icon"></i> {{/if}}
 					</tr>
 				{{/each}}
 				</tbody>
