@@ -61,9 +61,18 @@ Template.Edit_Contact_Page.events({
       instance.messageFlags.set(displayErrorMessages, true);
     }
   },
+  // 'click .delete'() {
+  //   Contact.remove(FlowRouter.getParam('_id'));
+  //   console.log('test');
+  // },
   'click .delete'() {
-    Contact.remove(FlowRouter.getParam('_id'));
-    console.log('test');
+    const r = confirm('Are you sure!');
+    if (r === true) {
+      Contact.remove(FlowRouter.getParam('_id'));
+    } else {
+      // txt = 'You pressed Cancel!';
+    }
   },
+
 });
 
