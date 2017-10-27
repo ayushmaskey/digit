@@ -1,6 +1,5 @@
 import { Contact } from '../../api/contacts/contacts.js';
 import { _ } from 'meteor/underscore';
-import { Meteor } from 'meteor/meteor';
 
 /**
  * A list of Contact to pre-fill the Collection.
